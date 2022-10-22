@@ -6,12 +6,20 @@ use anyhow::{Result, Context, Ok, bail};
 
 use reqwest::Client;
 use reqwest::header::USER_AGENT;
+use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
+use http_cache_reqwest::{Cache, HttpCache, CacheMode, CACacheManager};
 
 use serde_json::Value;
 
 lazy_static! {
     static ref AGENT: String = String::from("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.126 Safari/537.36");
-    static ref CLIENT: Client = Client::new();
+    static ref CLIENT: ClientWithMiddleware = ClientBuilder::new(Client::new())
+        .with(Cache(HttpCache {
+            mode: CacheMode::Default,
+            manager: CACacheManager::default(),
+            options: None,
+        }))
+        .build();
 }
 
 pub async fn get_json_from_url(url: &str) -> Result<Value> {
