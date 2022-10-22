@@ -61,7 +61,7 @@ pub async fn run(cmd: &ApplicationCommandInteraction, ctx: &Context) {
     embed
         .author(|author| {
             author
-                .url(format!("https://xkcd.com/{}/", &json["num"].as_str().unwrap()))
+                .url(format!("https://xkcd.com/{}/", &json["num"].as_i64().unwrap()))
                 .icon_url(command_utils::get_self_pfp_link(ctx))
                 .name(&json["title"].as_str().unwrap())
         })
