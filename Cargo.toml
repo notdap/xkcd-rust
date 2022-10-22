@@ -1,6 +1,6 @@
 [package]
 name = "xkcd_bot"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 
 [dependencies]
@@ -11,4 +11,3 @@ anyhow = "1.0.65"
 regex = "1.6.0"
 serde_json = "1.0.87"
 lazy_static = "1.4.0"
-chrono = "0.4.22"
