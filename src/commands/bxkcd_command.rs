@@ -39,7 +39,7 @@ pub async fn run(cmd: &ApplicationCommandInteraction, ctx: &Context) {
     let json = match xkcd_utils::get_json_from_url(&url).await {
         Ok(json) => json,
         Err(_) => {
-            command_utils::reply_error(ctx, cmd, "Could not parse response.").await;
+            command_utils::reply_error(ctx, cmd, "No comic was found for the provided query.").await;
             return;
         }
     };
